@@ -1,5 +1,9 @@
 //require("@nomicfoundation/hardhat-toolbox");
 require("@nomiclabs/hardhat-waffle");
+require('dotenv').config();
+const API_KEY = process.env.API_KEY || "";
+const PRIVATE_KEY = process.env.PRIVATE_KEY  || "";
+
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
@@ -7,8 +11,9 @@ module.exports = {
     artifacts: './src/artifacts',
   },
   networks:{
-    hardhat:{
-      chainId: 1337
-    }
+    sepolia: {
+      url : API_KEY,
+      accounts : [PRIVATE_KEY],
+    },
   }
 };

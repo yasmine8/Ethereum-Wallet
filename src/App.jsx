@@ -6,13 +6,13 @@ import { faEthereum} from '@fortawesome/free-brands-svg-icons'
 import Wallet from './artifacts/contracts/Wallet.sol/Wallet.json';
 import './App.css'
 
-let WalletAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const WalletAddress = import.meta.env.VITE_REACT_APP_WALLET_ADDRESS;
 
 function App() {
 
   const [balance, setBalance] = useState(0);
-  const [amountSend, setAmountSend] = useState();
-  const [amountWithdraw, setAmountWithdraw] = useState();
+  const [amountSend, setAmountSend] = useState('');
+  const [amountWithdraw, setAmountWithdraw] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
