@@ -3,7 +3,8 @@ import { useState ,useEffect } from 'react';
 import { ethers } from 'ethers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthereum} from '@fortawesome/free-brands-svg-icons'
-import Wallet from './artifacts/contracts/Wallet.sol/Wallet.json';
+//import Wallet from './artifacts/contracts/Wallet.sol/Wallet.json';
+import {walletAbi} from './constant'
 import './App.css'
 
 const WalletAddress = import.meta.env.VITE_REACT_APP_WALLET_ADDRESS;
@@ -24,7 +25,7 @@ function App() {
     if(typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(WalletAddress, Wallet.abi, provider);
+      const contract = new ethers.Contract(WalletAddress, walletAbi, provider);
       try {
         let overrides = {
           from: accounts[0]
@@ -76,7 +77,7 @@ function App() {
     const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(WalletAddress, Wallet.abi, signer);
+    const contract = new ethers.Contract(WalletAddress, walletAbi, signer);
     try {
       const transaction = await contract.withdrawMoney(accounts[0], ethers.utils.parseEther(amountWithdraw));
       await transaction.wait();
